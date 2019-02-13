@@ -23,10 +23,10 @@ add_action('wp_enqueue_scripts', 'jc_portfolio_gap_grid_scripts_styles');
 function jc_portfolio_grid_shortcode_func($atts) {
   global $pluginSlug;
 
-  // if multiple instances...
+  // if multiple instances on a page...
   static $first_call = true;
 
-  // ...only load css once
+  // ...only load the css once
   if ($first_call) {
     wp_enqueue_style($pluginSlug);
     $first_call = false;
@@ -51,9 +51,15 @@ function jc_portfolio_grid_shortcode_func($atts) {
     $html = '<div class="jc-portfolio-gap-grid">';
     while( $query->have_posts() ):
       $query->the_post();
-      $html .= '<div>
-        <h3>'. get_the_title() .'</h3>
-        '.plugins_url('/css/' . $pluginSlug . '.css',  __FILE__ ).'
+      $html .= '<div class="jc-portfolio-grid-item">
+        <figure>
+          <img src="' . get_the_post_thumbnail_url() . '" alt="' . get_the_title() . '" />
+        </figure>
+        <div class="jc-portfolio-grid-item-description">
+          <h3>'. get_the_title() .'</h3>
+          <div>' . get_the_excerpt() . '</div>
+          <a href="' . get_the_permalink() . '">View Home</a>
+        </div>
       </div>';
     endwhile;
     $html .= '</div>';

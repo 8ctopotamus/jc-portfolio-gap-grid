@@ -1,3 +1,50 @@
+:root {
+  --jc-red: #6a133d;
+  --jc-red-rgb: 106, 19, 61;
+  --jc-red-translucent: rgba(var(--jc-red-rgb), .7);
+}
+
 .jc-portfolio-gap-grid {
-  background: red;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 10px 1fr 10px 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.jc-portfolio-grid-item {
+  position: relative;
+}
+
+.jc-portfolio-grid-item-description {
+  display: block;
+  background: var(--jc-red-translucent);
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  transform: scale(0);
+  transition: all 0.5s ease;
+}
+
+.jc-portfolio-grid-item:hover .jc-portfolio-grid-item-description {
+  transform: scale(1);
+}
+
+.jc-portfolio-grid-item-description a {
+  display: inline-block;
+  background: white;
+  border-radius: 50px;
+  color: var(--jc-red);
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 6px 18px;
+  text-decoration: none;
 }
