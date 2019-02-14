@@ -17,7 +17,10 @@
 }
 
 .jc-portfolio-grid-item-description {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: var(--jc-red-translucent);
   color: white;
   position: absolute;
@@ -28,15 +31,28 @@
   bottom: 0;
   left: 0;
   text-align: center;
-  transform: scale(0);
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
 .jc-portfolio-grid-item:hover .jc-portfolio-grid-item-description {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
 }
 
-.jc-portfolio-grid-item-description a {
+.jc-portfolio-grid-item-description .jc-portfolio-grid-item-title {
+  display: inline-block;
+  color: white;
+  border-bottom: 1px solid white;
+  margin-bottom: 5px;
+}
+
+.jc-portfolio-grid-item-description .jc-portfolio-grid-item-button {
   display: inline-block;
   background: white;
   border-radius: 50px;
@@ -47,4 +63,16 @@
   margin-right: auto;
   padding: 6px 18px;
   text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .jc-portfolio-gap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 530px) {
+  .jc-portfolio-gap-grid {
+    grid-template-columns: 1fr;
+  }
 }

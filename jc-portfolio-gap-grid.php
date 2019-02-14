@@ -17,6 +17,7 @@ $pluginSlug = 'jc-portfolio-gap-grid';
 function jc_portfolio_gap_grid_scripts_styles() {
   global $pluginSlug;
   wp_register_style($pluginSlug, plugins_url('/css/' . $pluginSlug . '.css',  __FILE__ ));
+  wp_register_script($pluginSlug . '-excerpt-formatter', plugins_url('/js/excerpt-formatter.js',  __FILE__ ), array('jquery'), false, true );
 }
 add_action('wp_enqueue_scripts', 'jc_portfolio_gap_grid_scripts_styles');
 
@@ -29,6 +30,7 @@ function jc_portfolio_grid_shortcode_func($atts) {
   // ...only load the css once
   if ($first_call) {
     wp_enqueue_style($pluginSlug);
+    wp_enqueue_script($pluginSlug . '-excerpt-formatter');
     $first_call = false;
   }
 
@@ -56,9 +58,11 @@ function jc_portfolio_grid_shortcode_func($atts) {
           <img src="' . get_the_post_thumbnail_url() . '" alt="' . get_the_title() . '" />
         </figure>
         <div class="jc-portfolio-grid-item-description">
-          <h3>'. get_the_title() .'</h3>
-          <div>' . get_the_excerpt() . '</div>
-          <a href="' . get_the_permalink() . '">View Home</a>
+          <a href="' . get_the_permalink() . '">
+            <h3 class="jc-portfolio-grid-item-title">'. get_the_title() .'</h3>
+          </a>
+          <div class="jc-portfolio-grid-item-excerpt">' . get_the_excerpt() . '</div>
+          <a href="' . get_the_permalink() . '" class="jc-portfolio-grid-item-button">View Home</a>
         </div>
       </div>';
     endwhile;
